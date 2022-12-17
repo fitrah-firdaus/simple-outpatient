@@ -1,0 +1,34 @@
+@startuml sequence_diagram
+
+title Sequence Diagram
+actor Patient
+actor Registration_People
+participant User_Management
+participant Registration 
+actor Doctor
+participant Medical_Record
+participant Pharmacy
+actor Pharmacist
+actor Cashier
+participant Payment
+actor Accounting
+participant Back_Office
+
+Patient -> Registration_People : Come to the polyclinic
+Registration_People -> User_Management : login()
+User_Management -> Registration : createPatient()
+User_Management -> Registration : createBooking()
+
+Doctor -> Registration : readQueuePatient()
+Doctor -> Medical_Record : readMedicalRecord()
+Doctor -> Medical_Record : createMedicalRecord()
+Doctor -> Pharmacy : createRecipe()
+
+Pharmacist -> Pharmacy : readRecipe()
+Pharmacist -> Pharmacy : crudStockMedicine()
+
+Cashier -> Payment : createPayment()
+
+Accounting -> Back_Office : createReport()
+
+@enduml

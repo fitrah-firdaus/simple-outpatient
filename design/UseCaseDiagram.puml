@@ -1,0 +1,60 @@
+@startuml usecase_diagram
+
+title UseCase Diagram
+
+package pharmacy {
+    usecase "Create Recipe"
+    usecase "Read Recipe"
+    usecase "CRUD Stock Medicine"
+}
+
+package registration {
+    usecase "Create Patient"
+    usecase "Create Booking"
+    usecase "Read Queue of Patient" 
+}
+
+package payment {
+    usecase "Create Payment" 
+}
+
+package back_office {
+    usecase "Create Report"
+}
+
+package medical_record {
+    usecase "Create Medical Record"   
+    usecase "Read Medical Record"   
+}
+
+package user_management {
+    usecase "Login"
+}
+
+"registration people" as register
+register -up-> (Login)
+register -down-> (Create Patient)
+register -down-> (Create Booking)
+
+"Doctor" as doctor
+doctor -up-> (Login)
+doctor -down-> (Read Queue of Patient)
+doctor -down-> (Create Medical Record)
+doctor -down-> (Read Medical Record)
+doctor -down-> (Create Recipe)
+
+"Pharmacist" as pharmacist
+pharmacist -up-> (Login)
+pharmacist -down-> (Read Recipe)
+pharmacist -down-> (CRUD Stock Medicine)
+
+"Cashier" as cashier
+cashier -up-> (Login)
+cashier -down-> (Create Payment)
+
+"Accounting" as accounting
+accounting -up-> (Login)
+accounting -down-> (Create Report)
+
+@enduml
+

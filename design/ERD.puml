@@ -1,0 +1,145 @@
+@startuml entity_relationship_diagram
+
+title ERD
+
+entity User{
+    * user_id
+    --
+    * user_name : varchar(30)
+    * password : varchar(32)
+      role_id : number <<FK>>
+    * date_created : timestamp
+      last_modified : timestamp
+      is_deleted : boolean
+}
+
+entity Role{
+    * role_id
+    --
+    * role_name : varchar(30)
+    * date_created : timestamp
+      last_modified : timestamp
+      is_deleted : boolean 
+}
+
+entity Menu{
+    * menu_id
+    --
+    * menu_name : varchar(30)
+    * date_created : timestamp
+      last_modified : timestamp
+      is_deleted : boolean 
+}
+
+entity Permission {
+    * permission_id
+    --
+    * role_id : number <<FK>>
+    * menu_id : number <<FK>>
+    * date_created : timestamp
+      last_modified : timestamp
+      is_deleted : boolean 
+}
+
+entity Patient {
+    * patient_id
+    __
+    * patient_name : varchar(50)
+      birth_date : Date
+      address : text
+    * date_created : timestamp
+      last_modified : timestamp
+      is_deleted : boolean 
+}
+
+entity Doctor {
+    * doctor_id
+    --
+    * doctor_name : varchar(50)
+      specialist : varchar(50)
+    * date_created : timestamp
+      last_modified : timestamp
+      is_deleted : boolean  
+}
+
+entity Booking {
+    * booking_id
+    --
+    patient_id : text <<FK>>
+    doctor_id : text <<FK>>
+    * date_created : timestamp
+      last_modified : timestamp
+      is_deleted : boolean 
+}
+
+entity MedicalRecord {
+    * medical_record_id
+    --
+      patient_id : text <<FK>>
+      doctor_id : text <<FK>>
+      booking_id : text <<FK>>
+      recipe_id : text <<FK>>
+      diagnose : text
+    * date_created : timestamp
+      last_modified : timestamp
+      is_deleted : boolean 
+}
+
+entity Medicine {
+    * medicine_id
+    --
+    * sku_code : text
+      medicine_name : text
+    * date_created : timestamp
+      last_modified : timestamp
+      is_deleted : boolean  
+}
+
+entity Recipe {
+    * recipe_id
+    --
+    * medical_record_id : text <<FK>>
+    * date_created : timestamp
+      last_modified : timestamp
+      is_deleted : boolean  
+}
+
+entity Recipe_Details {
+    * recipe_details_id
+    --
+    * recipe_id : text <<FK>>
+    * medicine_id : text <<FK>>
+      rule : text
+    * date_created : timestamp
+      last_modified : timestamp
+      is_deleted : boolean  
+}
+
+entity Payment {
+    * payment_id
+    --
+    * booking_id : text <<FK>>
+    * total : number
+    * payment_method : text
+    * date_created : timestamp
+      last_modified : timestamp
+      is_deleted : boolean  
+
+}
+
+Role ||..o{ User
+
+Menu }|..|{ Role
+Role }|..|{ Permission
+Menu }|..|{ Permission
+
+Booking }|..|| Patient
+Booking }|..|| Doctor
+Booking ||..|| MedicalRecord
+MedicalRecord ||..|| Recipe
+
+Recipe ||..|{ Recipe_Details
+Recipe_Details }|..|| Medicine
+
+Booking ||..|{ Payment
+@enduml

@@ -1,25 +1,21 @@
 package org.simple.clinic.outpatient.view;
 
-import java.awt.GridLayout;
-
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
 import org.simple.clinic.outpatient.service.HelloService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import javax.swing.*;
+import java.awt.*;
 
 @Component
 public class Login {
 
-    @Autowired
-    private HelloService helloService;
+    private final HelloService helloService;
 
-    private JPanel panel = new JPanel();
+    private final JPanel panel = new JPanel();
+
+    public Login(HelloService helloService) {
+        this.helloService = helloService;
+    }
 
     public JPanel createLayout() {
         setLayout();

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class PasswordServiceImpl implements PasswordService {
     
-    private PasswordEncoder encoder = new BCryptPasswordEncoder();
+    private final PasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public String getHashedPassword(String password){
         return encoder.encode(password);

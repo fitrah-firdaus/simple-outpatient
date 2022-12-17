@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MainFrame {
 
-    private JFrame frame;
+    private final JFrame frame;
 
     public MainFrame(@Value("${application.name}") String appName) {
         frame = new JFrame();

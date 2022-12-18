@@ -1,6 +1,6 @@
 package org.simple.clinic.outpatient.service;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -11,12 +11,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class PasswordServiceTest {
 
-    private static Logger logger = LoggerFactory.getLogger(PasswordServiceTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(PasswordServiceTest.class);
 
     private static final String PASSWORD_VALUE = "password";
 
-    @Autowired
-    private PasswordService passwordService;
+    private final PasswordService passwordService;
+
+    public PasswordServiceTest(@Autowired PasswordService passwordService) {
+        this.passwordService = passwordService;
+    }
 
     @BeforeAll
     static void setup() {
@@ -27,7 +30,7 @@ public class PasswordServiceTest {
     void testGetHashedPassword() {
         String hashedPassword = passwordService.getHashedPassword(PASSWORD_VALUE);
         logger.info("hashedPassword = " + hashedPassword);
-        Assert.assertNotNull(hashedPassword);
+        Assertions.assertNotNull(hashedPassword);
     }
 
     @Test
@@ -35,8 +38,8 @@ public class PasswordServiceTest {
         String hashedPasswordDatabase = passwordService.getHashedPassword(PASSWORD_VALUE);
         logger.info("hashedPassword = " + hashedPasswordDatabase);
 
-        Assert.assertNotEquals(PASSWORD_VALUE, hashedPasswordDatabase);
+        Assertions.assertNotEquals(PASSWORD_VALUE, hashedPasswordDatabase);
 
-        Assert.assertTrue(passwordService.isPasswordMatches(PASSWORD_VALUE, hashedPasswordDatabase));
+        Assertions.assertTrue(passwordService.isPasswordMatches(PASSWORD_VALUE, hashedPasswordDatabase));
     }
 }

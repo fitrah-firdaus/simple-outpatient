@@ -1,24 +1,25 @@
 package org.simple.clinic.outpatient;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-
 import org.simple.clinic.outpatient.view.Login;
 import org.simple.clinic.outpatient.view.MainFrame;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import javax.swing.*;
+import java.awt.*;
+
 @SpringBootApplication
 public class MainApp {
 
-    @Autowired
-    private Login login;
+    private final Login login;
 
-    @Autowired
-    private MainFrame mainFrame;
+    private final MainFrame mainFrame;
+
+    public MainApp(Login login, MainFrame mainFrame) {
+        this.login = login;
+        this.mainFrame = mainFrame;
+    }
 
     private void initComponents() {
         JFrame main = mainFrame.getFrame();

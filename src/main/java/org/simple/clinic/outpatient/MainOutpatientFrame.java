@@ -4,7 +4,7 @@
  */
 package org.simple.clinic.outpatient;
 
-import org.simple.clinic.outpatient.view.Login;
+import org.simple.clinic.outpatient.view.LoginPanel;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -16,16 +16,16 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class MainOutpatientFrame extends javax.swing.JFrame {
     
-    private final Login login;
+    private final LoginPanel login;
 
     /**
      * Creates new form MainOutpatientFrame
      * @param login
      */
-    public MainOutpatientFrame(Login login) {
+    public MainOutpatientFrame(LoginPanel login) {
         this.login = login;
         initComponents();
-        this.setContentPane(login.createLayout());
+        this.setContentPane(this.login);
     }
 
     /**
@@ -38,13 +38,14 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1024, 768));
         setSize(new java.awt.Dimension(1024, 768));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1024, Short.MAX_VALUE)
+            .addGap(0, 1388, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

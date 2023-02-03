@@ -5,6 +5,7 @@
 package org.simple.clinic.outpatient.view;
 
 import javax.swing.JOptionPane;
+import org.simple.clinic.outpatient.MainOutpatientFrame;
 import org.simple.clinic.outpatient.service.HelloService;
 import org.springframework.stereotype.Component;
 
@@ -14,11 +15,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class LoginPanel extends javax.swing.JPanel {
-    
+
     private final HelloService helloService;
 
     /**
      * Creates new form LoginPanel
+     *
      * @param helloService
      */
     public LoginPanel(org.simple.clinic.outpatient.service.HelloService helloService) {

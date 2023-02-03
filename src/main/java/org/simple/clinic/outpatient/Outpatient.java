@@ -98,7 +98,6 @@ public class Outpatient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
-        // TODO add your handling code here:
         mainOutpatientFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_loginBtnMouseClicked

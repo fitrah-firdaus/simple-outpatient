@@ -30,7 +30,7 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        menuBar = new javax.swing.JMenuBar();
+        applicationMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
         editMenu = new javax.swing.JMenu();
 
@@ -39,12 +39,12 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1024, 768));
 
         fileMenu.setText("File");
-        menuBar.add(fileMenu);
+        applicationMenuBar.add(fileMenu);
 
         editMenu.setText("Edit");
-        menuBar.add(editMenu);
+        applicationMenuBar.add(editMenu);
 
-        setJMenuBar(menuBar);
+        setJMenuBar(applicationMenuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,8 +62,8 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar applicationMenuBar;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenuBar menuBar;
     // End of variables declaration//GEN-END:variables
 }

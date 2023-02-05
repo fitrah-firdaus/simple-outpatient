@@ -5,14 +5,18 @@
 package org.simple.clinic.outpatient;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  *
  * @author fef339
  */
 @SpringBootApplication
+@EntityScan(basePackages = {"org.simple.clinic.outpatient.model"})
+@EnableJpaRepositories(basePackages = {"org.simple.clinic.outpatient.repository"})
 public class Outpatient extends javax.swing.JFrame {
     private final MainOutpatientFrame mainOutpatientFrame;
 

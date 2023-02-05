@@ -30,7 +30,7 @@ import jakarta.persistence.TemporalType;
 @Table(catalog = "outpatient", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Medicine.findAll", query = "SELECT m FROM Medicine m")})
-public class Medicine implements Serializable {
+public class Medicine extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,16 +46,6 @@ public class Medicine implements Serializable {
     @Lob
     @Column(name = "medicine_name", nullable = false, length = 65535)
     private String medicineName;
-    @Basic(optional = false)
-    @Column(name = "date_created", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated;
-    @Column(name = "last_modified")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModified;
-    @Basic(optional = false)
-    @Column(name = "is_deleted", nullable = false)
-    private boolean isDeleted;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "medicineId")
     private List<RecipeDetails> recipeDetailsList;
 

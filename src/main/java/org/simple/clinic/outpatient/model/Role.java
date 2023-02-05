@@ -29,7 +29,7 @@ import jakarta.persistence.TemporalType;
 @Table(catalog = "outpatient", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")})
-public class Role implements Serializable {
+public class Role extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,16 +40,6 @@ public class Role implements Serializable {
     @Basic(optional = false)
     @Column(name = "role_name", nullable = false, length = 30)
     private String roleName;
-    @Basic(optional = false)
-    @Column(name = "date_created", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated;
-    @Column(name = "last_modified")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModified;
-    @Basic(optional = false)
-    @Column(name = "is_deleted", nullable = false)
-    private boolean isDeleted;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleId")
     private List<Permission> permissionList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "roleId")

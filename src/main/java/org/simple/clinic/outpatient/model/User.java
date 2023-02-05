@@ -26,7 +26,7 @@ import jakarta.persistence.UniqueConstraint;
 @Entity
 @Table(catalog = "outpatient", schema = "", uniqueConstraints = {
     @UniqueConstraint(columnNames = {"username"})})
-public class User implements Serializable {
+public class User extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,17 +40,6 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(nullable = false, length = 32)
     private String password;
-    @Basic(optional = false)
-    @Column(name = "date_created", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated;
-    @Basic(optional = false)
-    @Column(name = "last_modified", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModified;
-    @Basic(optional = false)
-    @Column(name = "is_deleted", nullable = false)
-    private boolean isDeleted;
     @JoinColumn(name = "role_id", referencedColumnName = "role_id", nullable = false)
     @ManyToOne(optional = false)
     private Role roleId;

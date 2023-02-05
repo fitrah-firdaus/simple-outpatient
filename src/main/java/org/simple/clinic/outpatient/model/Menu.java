@@ -29,7 +29,7 @@ import jakarta.persistence.TemporalType;
 @Table(catalog = "outpatient", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Menu.findAll", query = "SELECT m FROM Menu m")})
-public class Menu implements Serializable {
+public class Menu extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,17 +40,6 @@ public class Menu implements Serializable {
     @Basic(optional = false)
     @Column(name = "menu_name", nullable = false, length = 30)
     private String menuName;
-    @Basic(optional = false)
-    @Column(name = "date_created", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated;
-    @Basic(optional = false)
-    @Column(name = "last_modified", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModified;
-    @Basic(optional = false)
-    @Column(name = "is_deleted", nullable = false)
-    private boolean isDeleted;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "menuId")
     private List<Permission> permissionList;
 

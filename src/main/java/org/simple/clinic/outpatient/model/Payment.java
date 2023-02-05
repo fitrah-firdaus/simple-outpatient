@@ -29,7 +29,7 @@ import jakarta.persistence.TemporalType;
 @Table(catalog = "outpatient", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Payment.findAll", query = "SELECT p FROM Payment p")})
-public class Payment implements Serializable {
+public class Payment extends BaseModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,16 +44,6 @@ public class Payment implements Serializable {
     @Lob
     @Column(name = "payment_method", nullable = false, length = 65535)
     private String paymentMethod;
-    @Basic(optional = false)
-    @Column(name = "date_created", nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date dateCreated;
-    @Column(name = "last_modified")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModified;
-    @Basic(optional = false)
-    @Column(name = "is_deleted", nullable = false)
-    private boolean isDeleted;
     @JoinColumn(name = "booking_id", referencedColumnName = "booking_id", nullable = false)
     @ManyToOne(optional = false)
     private Booking bookingId;

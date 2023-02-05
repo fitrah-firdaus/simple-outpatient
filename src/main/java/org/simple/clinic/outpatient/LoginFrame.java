@@ -4,6 +4,9 @@
  */
 package org.simple.clinic.outpatient;
 
+import javax.swing.JOptionPane;
+import org.simple.clinic.outpatient.model.User;
+import org.simple.clinic.outpatient.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,6 +19,9 @@ public class LoginFrame extends javax.swing.JFrame {
 
     @Autowired
     private MainOutpatientFrame mainOutpatientFrame;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * Creates new form LoginFrame
@@ -98,8 +104,13 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
-        mainOutpatientFrame.setVisible(true);
-        this.setVisible(false);
+        User user = userService.login(userNameFld.getText(), new String(passwordFld.getPassword()));
+        if (user != null) {
+            mainOutpatientFrame.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Username and password didn't match");
+        }
     }//GEN-LAST:event_loginBtnMouseClicked
 
 

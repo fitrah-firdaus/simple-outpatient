@@ -4,6 +4,8 @@
  */
 package org.simple.clinic.outpatient;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 
@@ -13,12 +15,17 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MainOutpatientFrame extends javax.swing.JFrame {
+    
+    private final LoginFrame loginFrame;
+    private static final Logger logger = LoggerFactory.getLogger(MainOutpatientFrame.class);
   
     /**
      * Creates new form MainOutpatientFrame
+     * @param loginFrame
      */
-    public MainOutpatientFrame() {
+    public MainOutpatientFrame(LoginFrame loginFrame) {
         initComponents();
+        this.loginFrame = loginFrame;
     }
 
     /**
@@ -32,6 +39,7 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
 
         applicationMenuBar = new javax.swing.JMenuBar();
         fileMenu = new javax.swing.JMenu();
+        logoutMnItm = new javax.swing.JMenuItem();
         editMenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -39,6 +47,15 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1024, 768));
 
         fileMenu.setText("File");
+
+        logoutMnItm.setText("Logout");
+        logoutMnItm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutMnItmActionPerformed(evt);
+            }
+        });
+        fileMenu.add(logoutMnItm);
+
         applicationMenuBar.add(fileMenu);
 
         editMenu.setText("Edit");
@@ -60,10 +77,16 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void logoutMnItmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutMnItmActionPerformed
+        loginFrame.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_logoutMnItmActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar applicationMenuBar;
     private javax.swing.JMenu editMenu;
     private javax.swing.JMenu fileMenu;
+    private javax.swing.JMenuItem logoutMnItm;
     // End of variables declaration//GEN-END:variables
 }

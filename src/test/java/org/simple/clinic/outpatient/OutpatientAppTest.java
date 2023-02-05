@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OutpatientTest {
+class OutpatientAppTest {
 
 	@BeforeAll
 	static void setup(){

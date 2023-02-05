@@ -4,25 +4,25 @@
  */
 package org.simple.clinic.outpatient;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  *
  * @author fef339
  */
 @SpringBootApplication
-public class Outpatient extends javax.swing.JFrame {
-    private final MainOutpatientFrame mainOutpatientFrame;
+public class LoginFrame extends javax.swing.JFrame {
+
+    @Autowired
+    private MainOutpatientFrame mainOutpatientFrame;
 
     /**
      * Creates new form LoginFrame
-     * @param mainOutpatientFrame
+     *
      */
-    public Outpatient(org.simple.clinic.outpatient.MainOutpatientFrame mainOutpatientFrame) {
+    public LoginFrame() {
         initComponents();
-        this.mainOutpatientFrame = mainOutpatientFrame;
     }
 
     /**
@@ -102,41 +102,6 @@ public class Outpatient extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_loginBtnMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Outpatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Outpatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Outpatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Outpatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        ConfigurableApplicationContext ctx = new SpringApplicationBuilder(Outpatient.class).headless(false).run(args);
-        java.awt.EventQueue.invokeLater(() -> {
-           Outpatient loginFrame = ctx.getBean(Outpatient.class);
-           loginFrame.setVisible(true);
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearBtn;

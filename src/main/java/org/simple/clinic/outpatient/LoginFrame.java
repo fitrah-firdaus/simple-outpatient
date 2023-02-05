@@ -4,7 +4,7 @@
  */
 package org.simple.clinic.outpatient;
 
-import java.util.function.Consumer;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import org.simple.clinic.outpatient.model.Permission;
 import org.simple.clinic.outpatient.model.User;
@@ -20,7 +20,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class LoginFrame extends javax.swing.JFrame {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(LoginFrame.class);
 
     @Autowired
@@ -36,10 +36,25 @@ public class LoginFrame extends javax.swing.JFrame {
     public LoginFrame() {
         initComponents();
     }
-    
+
     public void clearData() {
         userNameFld.setText("");
         passwordFld.setText("");
+    }
+
+    private void login() {
+        User user = userService.login(userNameFld.getText(), new String(passwordFld.getPassword()));
+        if (user != null) {
+            if (user.getRoleId() != null && user.getRoleId().getPermissionList() != null && !user.getRoleId().getPermissionList().isEmpty()) {
+                user.getRoleId().getPermissionList().forEach((Permission t) -> {
+                    logger.info(t.getMenuId().toString());
+                });
+            }
+            mainOutpatientFrame.setVisible(true);
+            this.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Username and password didn't match");
+        }
     }
 
     /**
@@ -65,10 +80,27 @@ public class LoginFrame extends javax.swing.JFrame {
 
         passwordLbl.setText("Password");
 
+        userNameFld.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                userNameFldKeyTyped(evt);
+            }
+        });
+
+        passwordFld.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                passwordFldKeyTyped(evt);
+            }
+        });
+
         loginBtn.setText("Login");
         loginBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 loginBtnMouseClicked(evt);
+            }
+        });
+        loginBtn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                loginBtnKeyPressed(evt);
             }
         });
 
@@ -120,23 +152,28 @@ public class LoginFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
-        User user = userService.login(userNameFld.getText(), new String(passwordFld.getPassword()));
-        if (user != null) {
-            if(user.getRoleId() != null && user.getRoleId().getPermissionList() != null && !user.getRoleId().getPermissionList().isEmpty()) {
-                user.getRoleId().getPermissionList().forEach((Permission t) -> {
-                    logger.info(t.getMenuId().toString());
-                });
-            }
-            mainOutpatientFrame.setVisible(true);
-            this.setVisible(false);
-        } else {
-            JOptionPane.showMessageDialog(this, "Username and password didn't match");
-        }
+        login();
     }//GEN-LAST:event_loginBtnMouseClicked
 
     private void clearBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearBtnMouseClicked
         clearData();
     }//GEN-LAST:event_clearBtnMouseClicked
+
+    private void passwordFldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFldKeyTyped
+        if (KeyEvent.VK_ENTER == evt.getKeyChar()) {
+            login();
+        }
+    }//GEN-LAST:event_passwordFldKeyTyped
+
+    private void loginBtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_loginBtnKeyPressed
+        login();
+    }//GEN-LAST:event_loginBtnKeyPressed
+
+    private void userNameFldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userNameFldKeyTyped
+        if (KeyEvent.VK_ENTER == evt.getKeyChar()) {
+            passwordFld.requestFocus();
+        }
+    }//GEN-LAST:event_userNameFldKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

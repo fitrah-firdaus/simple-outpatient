@@ -4,13 +4,14 @@
  */
 package org.simple.clinic.outpatient.service;
 
+import java.io.Serializable;
 import org.simple.clinic.outpatient.model.User;
 
 /**
  *
  * @author fef339
  */
-public interface UserService {
+public interface UserService extends Serializable {
     
     User login(String userName, String password);
     

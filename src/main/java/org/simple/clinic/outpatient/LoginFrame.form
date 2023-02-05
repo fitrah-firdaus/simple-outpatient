@@ -79,8 +79,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="userNameFld">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="userNameFldKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="passwordFld">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="passwordFldKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="loginBtn">
       <Properties>
@@ -88,6 +94,7 @@
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="loginBtnMouseClicked"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="loginBtnKeyPressed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="clearBtn">

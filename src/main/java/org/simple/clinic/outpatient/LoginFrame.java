@@ -36,6 +36,11 @@ public class LoginFrame extends javax.swing.JFrame {
     public LoginFrame() {
         initComponents();
     }
+    
+    public void clearData() {
+        userNameFld.setText("");
+        passwordFld.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,6 +73,11 @@ public class LoginFrame extends javax.swing.JFrame {
         });
 
         clearBtn.setText("Clear");
+        clearBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearBtnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -123,6 +133,10 @@ public class LoginFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Username and password didn't match");
         }
     }//GEN-LAST:event_loginBtnMouseClicked
+
+    private void clearBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearBtnMouseClicked
+        clearData();
+    }//GEN-LAST:event_clearBtnMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

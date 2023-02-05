@@ -78,6 +78,7 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void logoutMnItmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutMnItmActionPerformed
+        loginFrame.clearData();
         loginFrame.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_logoutMnItmActionPerformed

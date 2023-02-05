@@ -166,10 +166,7 @@ public class Patient implements Serializable {
             return false;
         }
         Patient other = (Patient) object;
-        if ((this.patientId == null && other.patientId != null) || (this.patientId != null && !this.patientId.equals(other.patientId))) {
-            return false;
-        }
-        return true;
+        return !((this.patientId == null && other.patientId != null) || (this.patientId != null && !this.patientId.equals(other.patientId)));
     }
 
     @Override

@@ -151,10 +151,7 @@ public class Booking implements Serializable {
             return false;
         }
         Booking other = (Booking) object;
-        if ((this.bookingId == null && other.bookingId != null) || (this.bookingId != null && !this.bookingId.equals(other.bookingId))) {
-            return false;
-        }
-        return true;
+        return !((this.bookingId == null && other.bookingId != null) || (this.bookingId != null && !this.bookingId.equals(other.bookingId)));
     }
 
     @Override

@@ -128,10 +128,7 @@ public class Permission implements Serializable {
             return false;
         }
         Permission other = (Permission) object;
-        if ((this.permissionId == null && other.permissionId != null) || (this.permissionId != null && !this.permissionId.equals(other.permissionId))) {
-            return false;
-        }
-        return true;
+        return !((this.permissionId == null && other.permissionId != null) || (this.permissionId != null && !this.permissionId.equals(other.permissionId)));
     }
 
     @Override

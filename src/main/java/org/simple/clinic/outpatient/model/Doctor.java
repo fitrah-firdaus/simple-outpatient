@@ -151,10 +151,7 @@ public class Doctor implements Serializable {
             return false;
         }
         Doctor other = (Doctor) object;
-        if ((this.doctorId == null && other.doctorId != null) || (this.doctorId != null && !this.doctorId.equals(other.doctorId))) {
-            return false;
-        }
-        return true;
+        return !((this.doctorId == null && other.doctorId != null) || (this.doctorId != null && !this.doctorId.equals(other.doctorId)));
     }
 
     @Override

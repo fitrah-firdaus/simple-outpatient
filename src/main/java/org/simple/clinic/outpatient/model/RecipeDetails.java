@@ -142,10 +142,7 @@ public class RecipeDetails implements Serializable {
             return false;
         }
         RecipeDetails other = (RecipeDetails) object;
-        if ((this.recipeDetailsId == null && other.recipeDetailsId != null) || (this.recipeDetailsId != null && !this.recipeDetailsId.equals(other.recipeDetailsId))) {
-            return false;
-        }
-        return true;
+        return !((this.recipeDetailsId == null && other.recipeDetailsId != null) || (this.recipeDetailsId != null && !this.recipeDetailsId.equals(other.recipeDetailsId)));
     }
 
     @Override

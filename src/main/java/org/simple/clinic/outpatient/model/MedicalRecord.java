@@ -177,10 +177,7 @@ public class MedicalRecord implements Serializable {
             return false;
         }
         MedicalRecord other = (MedicalRecord) object;
-        if ((this.medicalRecordId == null && other.medicalRecordId != null) || (this.medicalRecordId != null && !this.medicalRecordId.equals(other.medicalRecordId))) {
-            return false;
-        }
-        return true;
+        return !((this.medicalRecordId == null && other.medicalRecordId != null) || (this.medicalRecordId != null && !this.medicalRecordId.equals(other.medicalRecordId)));
     }
 
     @Override

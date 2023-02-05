@@ -140,10 +140,7 @@ public class Recipe implements Serializable {
             return false;
         }
         Recipe other = (Recipe) object;
-        if ((this.recipeId == null && other.recipeId != null) || (this.recipeId != null && !this.recipeId.equals(other.recipeId))) {
-            return false;
-        }
-        return true;
+        return !((this.recipeId == null && other.recipeId != null) || (this.recipeId != null && !this.recipeId.equals(other.recipeId)));
     }
 
     @Override

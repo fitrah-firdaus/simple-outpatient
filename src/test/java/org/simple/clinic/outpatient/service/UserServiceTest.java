@@ -25,7 +25,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
  */
 @SpringBootTest
 @TestInstance(Lifecycle.PER_CLASS)
-public class UserServiceTest {
+class UserServiceTest {
 
     private final PasswordService passwordService;
     private final UserService userService;
@@ -38,7 +38,6 @@ public class UserServiceTest {
         this.passwordService = passwordService;
         this.userService = userService;
     }
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceTest.class);
 
     private static final String PASSWORD_VALUE = "password";
     private static final String BI_USER_NAME = "BI";

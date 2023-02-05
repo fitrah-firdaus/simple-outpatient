@@ -144,10 +144,7 @@ public class Medicine implements Serializable {
             return false;
         }
         Medicine other = (Medicine) object;
-        if ((this.medicineId == null && other.medicineId != null) || (this.medicineId != null && !this.medicineId.equals(other.medicineId))) {
-            return false;
-        }
-        return true;
+        return !((this.medicineId == null && other.medicineId != null) || (this.medicineId != null && !this.medicineId.equals(other.medicineId)));
     }
 
     @Override

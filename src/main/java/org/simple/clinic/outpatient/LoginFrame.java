@@ -4,9 +4,13 @@
  */
 package org.simple.clinic.outpatient;
 
+import java.util.function.Consumer;
 import javax.swing.JOptionPane;
+import org.simple.clinic.outpatient.model.Permission;
 import org.simple.clinic.outpatient.model.User;
 import org.simple.clinic.outpatient.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,6 +20,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class LoginFrame extends javax.swing.JFrame {
+    
+    private static final Logger logger = LoggerFactory.getLogger(LoginFrame.class);
 
     @Autowired
     private MainOutpatientFrame mainOutpatientFrame;
@@ -106,6 +112,11 @@ public class LoginFrame extends javax.swing.JFrame {
     private void loginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginBtnMouseClicked
         User user = userService.login(userNameFld.getText(), new String(passwordFld.getPassword()));
         if (user != null) {
+            if(user.getRoleId() != null && user.getRoleId().getPermissionList() != null && !user.getRoleId().getPermissionList().isEmpty()) {
+                user.getRoleId().getPermissionList().forEach((Permission t) -> {
+                    logger.info(t.getMenuId().toString());
+                });
+            }
             mainOutpatientFrame.setVisible(true);
             this.setVisible(false);
         } else {

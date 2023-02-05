@@ -99,7 +99,7 @@ public class Menu extends BaseModel implements Serializable {
 
     @Override
     public String toString() {
-        return "org.simple.clinic.outpatient.model.Menu[ menuId=" + menuId + " ]";
+        return "org.simple.clinic.outpatient.model.Menu[ menuId=" + menuId + " menuName=" + menuName + " ]";
     }
     
 }

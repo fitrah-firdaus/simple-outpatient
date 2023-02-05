@@ -4,7 +4,9 @@
  */
 package org.simple.clinic.outpatient.service.impl;
 
+import org.simple.clinic.outpatient.model.Role;
 import org.simple.clinic.outpatient.model.User;
+import org.simple.clinic.outpatient.repository.RoleRepository;
 import org.simple.clinic.outpatient.repository.UserRepository;
 import org.simple.clinic.outpatient.service.PasswordService;
 import org.simple.clinic.outpatient.service.UserService;
@@ -20,23 +22,29 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final PasswordService passwordService;
-    
+
     private final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     public UserServiceImpl(UserRepository userRepository,
-            PasswordService passwordService) {
+            PasswordService passwordService,
+            RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.passwordService = passwordService;
+        this.roleRepository = roleRepository;
     }
 
     @Override
     public User login(String userName, String password) {
         User user = userRepository.findByUsernameAndIsDeleted(userName, false);
         if (user != null && passwordService.isPasswordMatches(password, user.getPassword())) {
-            logger.info(user.toString());
-            if(user.getRoleId() != null) {
-                logger.info("Role = {}", user.getRoleId().getRoleName());
+            logger.info("User {} is success login", user.getUsername());
+            if (user.getRoleId() != null) {
+                Role roleWithPermissions = roleRepository.findByIdWithPermission(user.getRoleId().getRoleId(), false);
+                if (roleWithPermissions != null) {
+                    user.setRoleId(roleWithPermissions);
+                }
             }
             return user;
         }

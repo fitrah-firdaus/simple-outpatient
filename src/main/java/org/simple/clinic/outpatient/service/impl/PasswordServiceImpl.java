@@ -10,10 +10,23 @@ public class PasswordServiceImpl implements PasswordService {
     
     private final PasswordEncoder encoder = new BCryptPasswordEncoder();
 
+    /**
+     *
+     * @param password
+     * @return
+     */
+    @Override
     public String getHashedPassword(String password){
         return encoder.encode(password);
     }
 
+    /**
+     *
+     * @param passwordInput
+     * @param passwordDB
+     * @return
+     */
+    @Override
     public boolean isPasswordMatches(String passwordInput, String passwordDB){
         return encoder.matches(passwordInput, passwordDB);
     }

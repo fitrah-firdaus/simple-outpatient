@@ -40,6 +40,7 @@ public class LoginFrame extends javax.swing.JFrame {
     public void clearData() {
         userNameFld.setText("");
         passwordFld.setText("");
+        userNameFld.requestFocus();
     }
 
     private void login() {
@@ -49,7 +50,9 @@ public class LoginFrame extends javax.swing.JFrame {
                 user.getRoleId().getPermissionList().forEach((Permission t) -> {
                     logger.info(t.getMenuId().toString());
                 });
+                mainOutpatientFrame.setPermission(user.getRoleId().getPermissionList());
             }
+            mainOutpatientFrame.clearData();
             mainOutpatientFrame.setVisible(true);
             this.setVisible(false);
         } else {

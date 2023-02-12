@@ -4,10 +4,16 @@
  */
 package org.simple.clinic.outpatient;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JMenuItem;
+import org.simple.clinic.outpatient.model.Permission;
+import org.simple.clinic.outpatient.view.BookingPanel;
+import org.simple.clinic.outpatient.view.RegistrationPanel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
 
 /**
  *
@@ -15,17 +21,25 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class MainOutpatientFrame extends javax.swing.JFrame {
-    
+
     private final LoginFrame loginFrame;
+    private final RegistrationPanel registrationPanel;
+    private final BookingPanel bookingPanel;
     private static final Logger logger = LoggerFactory.getLogger(MainOutpatientFrame.class);
-  
+
     /**
      * Creates new form MainOutpatientFrame
+     *
      * @param loginFrame
+     * @param registrationPanel
+     * @param bookingPanel
      */
-    public MainOutpatientFrame(LoginFrame loginFrame) {
+    public MainOutpatientFrame(LoginFrame loginFrame, RegistrationPanel registrationPanel, BookingPanel bookingPanel) {
         initComponents();
+        disableAllMenu();
         this.loginFrame = loginFrame;
+        this.registrationPanel = registrationPanel;
+        this.bookingPanel = bookingPanel;
     }
 
     /**
@@ -37,29 +51,62 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        mainScrollPane = new javax.swing.JScrollPane();
         applicationMenuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        logoutMnItm = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
+        mainMenu = new javax.swing.JMenu();
+        registrationMnItem = new javax.swing.JMenuItem();
+        bookingMnItem = new javax.swing.JMenuItem();
+        pharmacyMnItem = new javax.swing.JMenuItem();
+        medRecMnItm = new javax.swing.JMenuItem();
+        paymentMnItem = new javax.swing.JMenuItem();
+        backOfficeMnItem = new javax.swing.JMenuItem();
+        logoutMnItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1024, 768));
         setSize(new java.awt.Dimension(1024, 768));
 
-        fileMenu.setText("File");
+        mainScrollPane.setPreferredSize(new java.awt.Dimension(1024, 768));
 
-        logoutMnItm.setText("Logout");
-        logoutMnItm.addActionListener(new java.awt.event.ActionListener() {
+        mainMenu.setText("Menu");
+
+        registrationMnItem.setText("Registration");
+        registrationMnItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutMnItmActionPerformed(evt);
+                registrationMnItemActionPerformed(evt);
             }
         });
-        fileMenu.add(logoutMnItm);
+        mainMenu.add(registrationMnItem);
 
-        applicationMenuBar.add(fileMenu);
+        bookingMnItem.setText("Booking");
+        bookingMnItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookingMnItemActionPerformed(evt);
+            }
+        });
+        mainMenu.add(bookingMnItem);
 
-        editMenu.setText("Edit");
-        applicationMenuBar.add(editMenu);
+        pharmacyMnItem.setText("Pharmacy");
+        mainMenu.add(pharmacyMnItem);
+
+        medRecMnItm.setText("Medical Record");
+        mainMenu.add(medRecMnItm);
+
+        paymentMnItem.setText("Payment");
+        mainMenu.add(paymentMnItem);
+
+        backOfficeMnItem.setText("Back Office");
+        mainMenu.add(backOfficeMnItem);
+
+        logoutMnItem.setText("Logout");
+        logoutMnItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutMnItemActionPerformed(evt);
+            }
+        });
+        mainMenu.add(logoutMnItem);
+
+        applicationMenuBar.add(mainMenu);
 
         setJMenuBar(applicationMenuBar);
 
@@ -67,27 +114,75 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(mainScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 744, Short.MAX_VALUE)
+            .addComponent(mainScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 744, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void logoutMnItmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutMnItmActionPerformed
+    private void logoutMnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutMnItemActionPerformed
         loginFrame.clearData();
         loginFrame.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_logoutMnItmActionPerformed
+    }//GEN-LAST:event_logoutMnItemActionPerformed
 
+    private void registrationMnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrationMnItemActionPerformed
+        logger.info("Registration Menu Clicked");
+        mainScrollPane.getViewport().removeAll();
+        mainScrollPane.setViewportView(registrationPanel);
+        this.setTitle("Registration");
+        revalidate();
+    }//GEN-LAST:event_registrationMnItemActionPerformed
+
+    private void bookingMnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookingMnItemActionPerformed
+        logger.info("Booking Menu Clicked");
+        mainScrollPane.getViewport().removeAll();
+        mainScrollPane.setViewportView(bookingPanel);
+        this.setTitle("Booking");
+        revalidate();
+    }//GEN-LAST:event_bookingMnItemActionPerformed
+
+    private void disableAllMenu() {
+        backOfficeMnItem.setVisible(false);
+        bookingMnItem.setVisible(false);
+        medRecMnItm.setVisible(false);
+        paymentMnItem.setVisible(false);
+        pharmacyMnItem.setVisible(false);
+        registrationMnItem.setVisible(false);
+    }
+
+    public void setPermission(List<Permission> permissionList) {
+        logger.info("SETTING PERMISSION");
+        Map<String, JMenuItem> mapMenuItem = new HashMap<>();
+        for (int i = 0; i < mainMenu.getItemCount(); i++) {
+            mapMenuItem.put(mainMenu.getItem(i).getText(), mainMenu.getItem(i));
+        }
+        permissionList.forEach((Permission t) -> {
+            mapMenuItem.computeIfPresent(t.getMenuId().getMenuName(), (var key, var val) -> {
+                val.setVisible(true);
+                return val;
+            });
+        });
+    }
+    
+    public void clearData(){
+        mainScrollPane.setViewportView(null);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar applicationMenuBar;
-    private javax.swing.JMenu editMenu;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenuItem logoutMnItm;
+    private javax.swing.JMenuItem backOfficeMnItem;
+    private javax.swing.JMenuItem bookingMnItem;
+    private javax.swing.JMenuItem logoutMnItem;
+    private javax.swing.JMenu mainMenu;
+    private javax.swing.JScrollPane mainScrollPane;
+    private javax.swing.JMenuItem medRecMnItm;
+    private javax.swing.JMenuItem paymentMnItem;
+    private javax.swing.JMenuItem pharmacyMnItem;
+    private javax.swing.JMenuItem registrationMnItem;
     // End of variables declaration//GEN-END:variables
 }

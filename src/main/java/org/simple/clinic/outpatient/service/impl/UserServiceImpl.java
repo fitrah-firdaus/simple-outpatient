@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String userName, String password) {
-        User user = userRepository.findByUsernameAndIsDeleted(userName, false);
+        User user = userRepository.findByUsernameAndIsDeleted(userName);
         if (user != null && passwordService.isPasswordMatches(password, user.getPassword())) {
             logger.info("User {} is success login", user.getUsername());
             if (user.getRoleId() != null) {

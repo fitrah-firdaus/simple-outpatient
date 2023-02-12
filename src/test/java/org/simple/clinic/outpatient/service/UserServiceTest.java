@@ -48,7 +48,7 @@ class UserServiceTest {
         biUser.setUsername(BI_USER_NAME);
         biUser.setPassword(passwordService.getHashedPassword(PASSWORD_VALUE));
 
-        Mockito.when(userRepository.findByUsernameAndIsDeleted(BI_USER_NAME, false)).thenReturn(biUser);
+        Mockito.when(userRepository.findByUsernameAndIsDeleted(BI_USER_NAME)).thenReturn(biUser);
     }
 
     @Test

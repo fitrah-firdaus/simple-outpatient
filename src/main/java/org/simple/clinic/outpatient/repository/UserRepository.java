@@ -7,6 +7,7 @@ package org.simple.clinic.outpatient.repository;
 import org.simple.clinic.outpatient.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,6 +17,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
  
-    @Query("select u from User u join fetch u.roleId where u.username = ?1 and u.isDeleted = ?2")
-    User findByUsernameAndIsDeleted(String userName, boolean deleted);
+    @Query("select u from User u join fetch u.roleId where u.username = :userName and u.isDeleted = false")
+    User findByUsernameAndIsDeleted(@Param("userName") String userName);
 }

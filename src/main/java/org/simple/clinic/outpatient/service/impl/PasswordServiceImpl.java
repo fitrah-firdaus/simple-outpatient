@@ -12,7 +12,6 @@ public class PasswordServiceImpl implements PasswordService {
 
     /**
      *
-     * @param password
      * @return
      */
     @Override
@@ -22,8 +21,6 @@ public class PasswordServiceImpl implements PasswordService {
 
     /**
      *
-     * @param passwordInput
-     * @param passwordDB
      * @return
      */
     @Override

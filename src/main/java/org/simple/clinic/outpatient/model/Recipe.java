@@ -39,7 +39,8 @@ public class Recipe extends BaseModel implements Serializable {
     private Integer recipeId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipeId")
     private List<MedicalRecord> medicalRecordList;
-    @JoinColumn(name = "medical_record_id", referencedColumnName = "medical_record_id", nullable = false)
+    @JoinColumn(name = "medical_record_id", referencedColumnName = "medical_record_id",
+            nullable = false)
     @ManyToOne(optional = false)
     private MedicalRecord medicalRecordId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipeId")
@@ -99,7 +100,7 @@ public class Recipe extends BaseModel implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        
+
         if (!(object instanceof Recipe)) {
             return false;
         }
@@ -111,5 +112,5 @@ public class Recipe extends BaseModel implements Serializable {
     public String toString() {
         return "org.simple.clinic.outpatient.model.Recipe[ recipeId=" + recipeId + " ]";
     }
-    
+
 }

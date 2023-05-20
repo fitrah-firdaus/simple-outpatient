@@ -11,7 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class PasswordServiceTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(PasswordServiceTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(
+            PasswordServiceTest.class);
 
     private static final String PASSWORD_VALUE = "password";
 
@@ -28,18 +29,22 @@ class PasswordServiceTest {
 
     @Test
     void testGetHashedPassword() {
-        String hashedPassword = passwordService.getHashedPassword(PASSWORD_VALUE);
+        String hashedPassword = passwordService.getHashedPassword(
+                PASSWORD_VALUE);
         logger.info("hashedPassword = " + hashedPassword);
         Assertions.assertNotNull(hashedPassword);
     }
 
     @Test
     void testIsPasswordMatches() {
-        String hashedPasswordDatabase = passwordService.getHashedPassword(PASSWORD_VALUE);
+        String hashedPasswordDatabase = passwordService.getHashedPassword(
+                PASSWORD_VALUE);
         logger.info("hashedPassword = " + hashedPasswordDatabase);
 
-        Assertions.assertNotEquals(PASSWORD_VALUE, hashedPasswordDatabase);
+        Assertions.assertNotEquals(PASSWORD_VALUE, 
+                hashedPasswordDatabase);
 
-        Assertions.assertTrue(passwordService.isPasswordMatches(PASSWORD_VALUE, hashedPasswordDatabase));
+        Assertions.assertTrue(passwordService.isPasswordMatches(
+                PASSWORD_VALUE, hashedPasswordDatabase));
     }
 }

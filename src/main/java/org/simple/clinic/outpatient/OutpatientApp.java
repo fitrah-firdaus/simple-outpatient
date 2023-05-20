@@ -14,7 +14,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 public class OutpatientApp {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext ctx = new SpringApplicationBuilder(LoginFrame.class).headless(false).run(args);
+        ConfigurableApplicationContext ctx = new SpringApplicationBuilder(
+                LoginFrame.class).headless(false).run(args);
         java.awt.EventQueue.invokeLater(() -> {
             LoginFrame outpatient = ctx.getBean(LoginFrame.class);
             outpatient.setVisible(true);

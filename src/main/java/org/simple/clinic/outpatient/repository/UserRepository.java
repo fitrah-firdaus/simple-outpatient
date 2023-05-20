@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
  
-    @Query("select u from User u join fetch u.roleId where u.username = :userName and u.isDeleted = false")
+    @Query("select u from User u join fetch u.roleId where u.username = :userName "
+            + "and u.isDeleted = false")
     User findByUsernameAndIsDeleted(@Param("userName") String userName);
 }

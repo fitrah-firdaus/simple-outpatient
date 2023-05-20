@@ -26,13 +26,17 @@
               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="registerBtn" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="birthDatePicker" min="-2" max="-2" attributes="0"/>
-                      <Component id="nameFld" max="32767" attributes="0"/>
-                      <Component id="addressScrollPane" alignment="0" pref="250" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="birthDatePicker" min="-2" max="-2" attributes="0"/>
+                          <Component id="nameFld" max="32767" attributes="0"/>
+                          <Component id="addressScrollPane" alignment="0" pref="250" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+                      <Component id="patientIdLbl" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="513" max="32767" attributes="0"/>
+              <EmptySpace pref="374" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -43,6 +47,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="patientNameLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nameFld" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="patientIdLbl" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -88,7 +93,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="addressTxt">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -100,6 +105,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Register"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="registerBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="patientIdLbl">
     </Component>
   </SubComponents>
 </Form>

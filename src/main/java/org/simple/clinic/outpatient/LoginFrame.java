@@ -21,7 +21,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LoginFrame extends javax.swing.JFrame {
 
-    private static final Logger logger = LoggerFactory.getLogger(LoginFrame.class);
+    private static final Logger logger = LoggerFactory.getLogger(
+            LoginFrame.class);
 
     @Autowired
     private MainOutpatientFrame mainOutpatientFrame;
@@ -44,19 +45,25 @@ public class LoginFrame extends javax.swing.JFrame {
     }
 
     private void login() {
-        User user = userService.login(userNameFld.getText(), new String(passwordFld.getPassword()));
+        User user = userService.login(userNameFld.getText(), 
+                new String(passwordFld.getPassword()));
         if (user != null) {
-            if (user.getRoleId() != null && user.getRoleId().getPermissionList() != null && !user.getRoleId().getPermissionList().isEmpty()) {
+            if (user.getRoleId() != null 
+                    && user.getRoleId().getPermissionList() != null 
+                    && !user.getRoleId().getPermissionList().isEmpty()) {
                 user.getRoleId().getPermissionList().forEach((Permission t) -> {
                     logger.info(t.getMenuId().toString());
                 });
-                mainOutpatientFrame.setPermission(user.getRoleId().getPermissionList());
+                mainOutpatientFrame.setPermission(
+                        user.getRoleId()
+                                .getPermissionList());
             }
             mainOutpatientFrame.clearData();
             mainOutpatientFrame.setVisible(true);
             this.setVisible(false);
         } else {
-            JOptionPane.showMessageDialog(this, "Username and password didn't match");
+            JOptionPane.showMessageDialog(this, 
+                    "Username and password didn't match");
         }
     }
 
@@ -101,6 +108,11 @@ public class LoginFrame extends javax.swing.JFrame {
                 loginBtnMouseClicked(evt);
             }
         });
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBtnActionPerformed(evt);
+            }
+        });
         loginBtn.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 loginBtnKeyPressed(evt);
@@ -111,6 +123,11 @@ public class LoginFrame extends javax.swing.JFrame {
         clearBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 clearBtnMouseClicked(evt);
+            }
+        });
+        clearBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearBtnActionPerformed(evt);
             }
         });
 
@@ -177,6 +194,16 @@ public class LoginFrame extends javax.swing.JFrame {
             passwordFld.requestFocus();
         }
     }//GEN-LAST:event_userNameFldKeyTyped
+
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+
+        login();
+    }//GEN-LAST:event_loginBtnActionPerformed
+
+    private void clearBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearBtnActionPerformed
+        // TODO add your handling code here:
+        clearData();
+    }//GEN-LAST:event_clearBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

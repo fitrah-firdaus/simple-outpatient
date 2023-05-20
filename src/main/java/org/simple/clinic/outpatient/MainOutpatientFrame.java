@@ -9,8 +9,9 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JMenuItem;
 import org.simple.clinic.outpatient.model.Permission;
-import org.simple.clinic.outpatient.view.BookingPanel;
-import org.simple.clinic.outpatient.view.RegistrationPanel;
+import org.simple.clinic.outpatient.view.booking.BookingPanel;
+import org.simple.clinic.outpatient.view.registration.RegistrationDataPanel;
+import org.simple.clinic.outpatient.view.registration.RegistrationPanel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -23,9 +24,15 @@ import org.springframework.stereotype.Component;
 public class MainOutpatientFrame extends javax.swing.JFrame {
 
     private final LoginFrame loginFrame;
-    private final RegistrationPanel registrationPanel;
+    private final RegistrationPanel 
+            registrationPanel;
+    private final RegistrationDataPanel 
+            registrationDataPanel;
     private final BookingPanel bookingPanel;
-    private static final Logger logger = LoggerFactory.getLogger(MainOutpatientFrame.class);
+    private static final Logger logger = 
+            LoggerFactory.getLogger(
+                    MainOutpatientFrame
+                            .class);
 
     /**
      * Creates new form MainOutpatientFrame
@@ -33,13 +40,23 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
      * @param loginFrame
      * @param registrationPanel
      * @param bookingPanel
+     * @param registrationDataPanel
      */
-    public MainOutpatientFrame(LoginFrame loginFrame, RegistrationPanel registrationPanel, BookingPanel bookingPanel) {
+    public MainOutpatientFrame(LoginFrame 
+            loginFrame,
+            RegistrationPanel 
+                    registrationPanel,
+            BookingPanel bookingPanel,
+            RegistrationDataPanel 
+                    registrationDataPanel) {
         initComponents();
         disableAllMenu();
         this.loginFrame = loginFrame;
-        this.registrationPanel = registrationPanel;
+        this.registrationPanel = 
+                registrationPanel;
         this.bookingPanel = bookingPanel;
+        this.registrationDataPanel = 
+                registrationDataPanel;
     }
 
     /**
@@ -131,9 +148,16 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_logoutMnItemActionPerformed
 
     private void registrationMnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrationMnItemActionPerformed
-        logger.info("Registration Menu Clicked");
-        mainScrollPane.getViewport().removeAll();
-        mainScrollPane.setViewportView(registrationPanel);
+        logger.info(
+                "Registration Menu "
+                        + "Clicked");
+        mainScrollPane
+                .getViewport().removeAll();
+        mainScrollPane
+                .setViewportView(
+                        registrationDataPanel
+                );
+        registrationDataPanel.loadData();
         this.setTitle("Registration");
         revalidate();
     }//GEN-LAST:event_registrationMnItemActionPerformed
@@ -155,22 +179,39 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
         registrationMnItem.setVisible(false);
     }
 
-    public void setPermission(List<Permission> permissionList) {
+    public void setPermission(List<Permission> 
+            permissionList) {
         logger.info("SETTING PERMISSION");
-        Map<String, JMenuItem> mapMenuItem = new HashMap<>();
-        for (int i = 0; i < mainMenu.getItemCount(); i++) {
-            mapMenuItem.put(mainMenu.getItem(i).getText(), mainMenu.getItem(i));
+        Map<String, JMenuItem> mapMenuItem = 
+                new HashMap<>();
+        for (int i = 0; i < mainMenu
+                .getItemCount(); i++) {
+            mapMenuItem.put(mainMenu
+                    .getItem(i).getText(), 
+                    mainMenu
+                            .getItem(i));
         }
-        permissionList.forEach((Permission t) -> {
-            mapMenuItem.computeIfPresent(t.getMenuId().getMenuName(), (var key, var val) -> {
+        permissionList.forEach((Permission t)
+                -> {
+            mapMenuItem.computeIfPresent(
+                    t.getMenuId()
+                            .getMenuName(), 
+                    (var key, var val) -> {
                 val.setVisible(true);
                 return val;
             });
         });
     }
-    
-    public void clearData(){
+
+    public void clearData() {
         mainScrollPane.setViewportView(null);
+    }
+    
+    public void updateScrollPane(java.awt.Component component){
+        mainScrollPane.getViewport().removeAll();
+        mainScrollPane.setViewportView(component);
+        component.setVisible(true);
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

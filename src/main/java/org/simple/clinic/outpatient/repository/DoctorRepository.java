@@ -4,9 +4,8 @@
  */
 package org.simple.clinic.outpatient.repository;
 
-import org.simple.clinic.outpatient.model.Role;
+import org.simple.clinic.outpatient.model.Doctor;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,9 +13,7 @@ import org.springframework.stereotype.Repository;
  * @author fef339
  */
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Integer> {
+public interface DoctorRepository extends
+        JpaRepository<Doctor, Integer>{
     
-    @Query("select r from Role r join fetch r.permissionList join fetch "
-            + "r.permissionList.menuId where r.roleId =?1 and r.isDeleted = ?2")
-    Role findByIdWithPermission(Integer id, boolean isDeleted);
 }

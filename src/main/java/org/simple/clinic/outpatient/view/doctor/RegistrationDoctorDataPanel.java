@@ -4,6 +4,13 @@
  */
 package org.simple.clinic.outpatient.view.doctor;
 
+import java.util.List;
+import javax.swing.JViewport;
+import javax.swing.table.DefaultTableModel;
+import org.simple.clinic.outpatient.model.Doctor;
+import org.simple.clinic.outpatient.repository.DoctorRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -12,12 +19,50 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class RegistrationDoctorDataPanel extends javax.swing.JPanel {
+    
+    private static final Logger logger = LoggerFactory.getLogger(RegistrationDoctorDataPanel.class);
+    
+    private final DoctorRepository doctorRepository;
+    
+    private final RegistrationDoctorPanel registrationDoctorPanel;
 
     /**
      * Creates new form RegistrationDoctorDataPanel
+     * @param doctorRepository
+     * @param registrationDoctorPanel
      */
-    public RegistrationDoctorDataPanel() {
+    public RegistrationDoctorDataPanel(DoctorRepository doctorRepository, RegistrationDoctorPanel registrationDoctorPanel) {
         initComponents();
+        this.doctorRepository = doctorRepository;
+        this.registrationDoctorPanel = registrationDoctorPanel;
+    }
+    
+    private void clearDataDoctorTable(){
+        DefaultTableModel model = (DefaultTableModel) doctorTbl.getModel();
+        model.setRowCount(0);
+    }
+    
+    public void loadData() {
+        List<Doctor> doctorList = doctorRepository.findAll();
+        clearDataDoctorTable();
+        DefaultTableModel model = (DefaultTableModel) doctorTbl.getModel();
+        for (int i = 0; i < doctorList.size(); i++) {
+            Doctor get = doctorList.get(i);
+            model.addRow(new Object[]{
+                get.getDoctorId().toString(),
+                get.getDoctorName(),
+                get.getSpecialist()
+            });
+        }
+    }
+    
+    private void showRegistrationDoctorPanel() {
+        registrationDoctorPanel.setRegistrationDoctorDataPanel(this);
+        registrationDoctorPanel.clearData();
+        JViewport viewport = (JViewport) 
+                this.getParent();
+        viewport.removeAll();
+        viewport.setView(registrationDoctorPanel);
     }
 
     /**
@@ -35,8 +80,18 @@ public class RegistrationDoctorDataPanel extends javax.swing.JPanel {
         doctorTbl = new javax.swing.JTable();
 
         addDoctorBtn.setText("Add Doctor");
+        addDoctorBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addDoctorBtnActionPerformed(evt);
+            }
+        });
 
         updateDoctorBtn.setText("Update Doctor");
+        updateDoctorBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateDoctorBtnActionPerformed(evt);
+            }
+        });
 
         doctorTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -89,6 +144,19 @@ public class RegistrationDoctorDataPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void addDoctorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addDoctorBtnActionPerformed
+        showRegistrationDoctorPanel();
+    }//GEN-LAST:event_addDoctorBtnActionPerformed
+
+    private void updateDoctorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateDoctorBtnActionPerformed
+        DefaultTableModel model = (DefaultTableModel) doctorTbl.getModel();
+        int rowSelected = doctorTbl.getSelectedRow();
+        
+        String id = (String) model.getValueAt(rowSelected, 0);
+        showRegistrationDoctorPanel();
+        registrationDoctorPanel.loadDataById(Integer.parseInt(id));
+    }//GEN-LAST:event_updateDoctorBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

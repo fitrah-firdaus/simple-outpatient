@@ -14,6 +14,7 @@
     <class>org.simple.clinic.outpatient.model.Role</class>
     <class>org.simple.clinic.outpatient.model.Patient</class>
     <class>org.simple.clinic.outpatient.model.Medicine</class>
+    <class>org.simple.clinic.outpatient.model.DoctorSchedule</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/outpatient?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

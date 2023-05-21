@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.swing.JMenuItem;
 import org.simple.clinic.outpatient.model.Permission;
 import org.simple.clinic.outpatient.view.booking.BookingPanel;
+import org.simple.clinic.outpatient.view.doctor.RegistrationDoctorDataPanel;
 import org.simple.clinic.outpatient.view.registration.RegistrationDataPanel;
 import org.simple.clinic.outpatient.view.registration.RegistrationPanel;
 import org.slf4j.Logger;
@@ -29,6 +30,7 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
     private final RegistrationDataPanel 
             registrationDataPanel;
     private final BookingPanel bookingPanel;
+    private final RegistrationDoctorDataPanel registrationDoctorDataPanel;
     private static final Logger logger = 
             LoggerFactory.getLogger(
                     MainOutpatientFrame
@@ -41,14 +43,10 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
      * @param registrationPanel
      * @param bookingPanel
      * @param registrationDataPanel
+     * @param registrationDoctorDataPanel
      */
-    public MainOutpatientFrame(LoginFrame 
-            loginFrame,
-            RegistrationPanel 
-                    registrationPanel,
-            BookingPanel bookingPanel,
-            RegistrationDataPanel 
-                    registrationDataPanel) {
+    public MainOutpatientFrame(LoginFrame loginFrame, RegistrationPanel registrationPanel, BookingPanel bookingPanel, RegistrationDataPanel registrationDataPanel, 
+            RegistrationDoctorDataPanel registrationDoctorDataPanel) {
         initComponents();
         disableAllMenu();
         this.loginFrame = loginFrame;
@@ -57,6 +55,7 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
         this.bookingPanel = bookingPanel;
         this.registrationDataPanel = 
                 registrationDataPanel;
+        this.registrationDoctorDataPanel = registrationDoctorDataPanel;
     }
 
     /**
@@ -72,6 +71,7 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
         applicationMenuBar = new javax.swing.JMenuBar();
         mainMenu = new javax.swing.JMenu();
         registrationMnItem = new javax.swing.JMenuItem();
+        doctorMnItem = new javax.swing.JMenuItem();
         bookingMnItem = new javax.swing.JMenuItem();
         pharmacyMnItem = new javax.swing.JMenuItem();
         medRecMnItm = new javax.swing.JMenuItem();
@@ -80,7 +80,6 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
         logoutMnItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1024, 768));
         setSize(new java.awt.Dimension(1024, 768));
 
         mainScrollPane.setPreferredSize(new java.awt.Dimension(1024, 768));
@@ -94,6 +93,14 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
             }
         });
         mainMenu.add(registrationMnItem);
+
+        doctorMnItem.setText("Doctor");
+        doctorMnItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                doctorMnItemActionPerformed(evt);
+            }
+        });
+        mainMenu.add(doctorMnItem);
 
         bookingMnItem.setText("Booking");
         bookingMnItem.addActionListener(new java.awt.event.ActionListener() {
@@ -170,6 +177,15 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
         revalidate();
     }//GEN-LAST:event_bookingMnItemActionPerformed
 
+    private void doctorMnItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorMnItemActionPerformed
+        logger.info("Doctor Menu Clicked");
+        mainScrollPane.getViewport().removeAll();
+        mainScrollPane.setViewportView(registrationDoctorDataPanel);
+        registrationDoctorDataPanel.loadData();
+        this.setTitle("Doctor");
+        revalidate();
+    }//GEN-LAST:event_doctorMnItemActionPerformed
+
     private void disableAllMenu() {
         backOfficeMnItem.setVisible(false);
         bookingMnItem.setVisible(false);
@@ -218,6 +234,7 @@ public class MainOutpatientFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar applicationMenuBar;
     private javax.swing.JMenuItem backOfficeMnItem;
     private javax.swing.JMenuItem bookingMnItem;
+    private javax.swing.JMenuItem doctorMnItem;
     private javax.swing.JMenuItem logoutMnItem;
     private javax.swing.JMenu mainMenu;
     private javax.swing.JScrollPane mainScrollPane;

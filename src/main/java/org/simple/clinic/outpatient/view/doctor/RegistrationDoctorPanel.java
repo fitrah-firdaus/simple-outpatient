@@ -26,17 +26,18 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class RegistrationDoctorPanel extends javax.swing.JPanel {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(RegistrationDoctorPanel.class);
-    
+
     private final DoctorRegistrationService doctorRegistrationService;
-    
+
     private RegistrationDoctorDataPanel registrationDoctorDataPanel;
-    
+
     private SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
 
     /**
      * Creates new form RegistrationDoctorPanel
+     *
      * @param doctorRegistrationService
      */
     public RegistrationDoctorPanel(DoctorRegistrationService doctorRegistrationService) {
@@ -48,28 +49,27 @@ public class RegistrationDoctorPanel extends javax.swing.JPanel {
     public void setRegistrationDoctorDataPanel(RegistrationDoctorDataPanel registrationDoctorDataPanel) {
         this.registrationDoctorDataPanel = registrationDoctorDataPanel;
     }
-    
-    
+
     public void clearData() {
         doctorNameTxt.setText("");
         doctorSpecialistTxt.setText("");
         doctorIdLbl.setText("");
         clearDataSchedule();
     }
-    
+
     private void clearDataSchedule() {
         DefaultTableModel model = (DefaultTableModel) doctorScheduleTbl.getModel();
         model.setRowCount(0);
     }
-    
+
     private void addDataSchedule() {
         DefaultTableModel model = (DefaultTableModel) doctorScheduleTbl.getModel();
         model.addRow(new Object[]{});
     }
-    
-    public void loadDataById(int id){
+
+    public void loadDataById(int id) {
         Doctor doctor = doctorRegistrationService.findDoctorById(id);
-        if(doctor != null){
+        if (doctor != null) {
             logger.info("SET DATA");
             setData(doctor);
         } else {
@@ -77,15 +77,15 @@ public class RegistrationDoctorPanel extends javax.swing.JPanel {
             clearData();
         }
     }
-    
-    private void setData(Doctor doctor){
+
+    private void setData(Doctor doctor) {
         doctorNameTxt.setText(doctor.getDoctorName());
         doctorIdLbl.setText(doctor.getDoctorId().toString());
         doctorSpecialistTxt.setText(doctor.getSpecialist());
         setDataSchedule(doctor.getDoctorScheduleList());
     }
-    
-    private void setDataSchedule(List<DoctorSchedule> doctorScheduleList){
+
+    private void setDataSchedule(List<DoctorSchedule> doctorScheduleList) {
         clearDataSchedule();
         DefaultTableModel model = (DefaultTableModel) doctorScheduleTbl.getModel();
         for (int i = 0; i < doctorScheduleList.size(); i++) {
@@ -97,7 +97,7 @@ public class RegistrationDoctorPanel extends javax.swing.JPanel {
             });
         }
     }
-    
+
     private void loadRegistrationDoctorDataPanel() {
         logger.info(this.getParent().
                 toString());
@@ -106,8 +106,6 @@ public class RegistrationDoctorPanel extends javax.swing.JPanel {
         viewport.removeAll();
         viewport.setView(registrationDoctorDataPanel);
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -128,6 +126,7 @@ public class RegistrationDoctorPanel extends javax.swing.JPanel {
         doctorScheduleTbl = new javax.swing.JTable();
         doctorIdLbl = new javax.swing.JLabel();
         addScheduleBtn = new javax.swing.JButton();
+        deleteScheduleBtn = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -170,6 +169,13 @@ public class RegistrationDoctorPanel extends javax.swing.JPanel {
             }
         });
 
+        deleteScheduleBtn.setText("Delete Schedule");
+        deleteScheduleBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteScheduleBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,13 +196,17 @@ public class RegistrationDoctorPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(268, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(addScheduleBtn)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(doctorIdLbl)
                         .addGap(76, 76, 76)
-                        .addComponent(doctorSchedulePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(223, 223, 223))
+                        .addComponent(doctorSchedulePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(223, 223, 223))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(addScheduleBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteScheduleBtn)
+                        .addGap(271, 271, 271))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +226,9 @@ public class RegistrationDoctorPanel extends javax.swing.JPanel {
                         .addGap(79, 79, 79))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(addScheduleBtn)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addScheduleBtn)
+                            .addComponent(deleteScheduleBtn))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(doctorSchedulePane, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)))
@@ -227,12 +239,12 @@ public class RegistrationDoctorPanel extends javax.swing.JPanel {
 
     private void doctorRegistrationBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doctorRegistrationBtnActionPerformed
         Doctor doctor = new Doctor();
-        if(!doctorIdLbl.getText().isEmpty()){
+        if (!doctorIdLbl.getText().isEmpty()) {
             doctor = doctorRegistrationService.findDoctorById(Integer.parseInt(doctorIdLbl.getText()));
         }
         doctor.setDoctorName(doctorNameTxt.getText());
         doctor.setSpecialist(doctorSpecialistTxt.getText());
-        
+
         DefaultTableModel model = (DefaultTableModel) doctorScheduleTbl.getModel();
         List<DoctorSchedule> doctorScheduleList = new LinkedList<>();
         for (int i = 0; i < model.getRowCount(); i++) {
@@ -249,8 +261,8 @@ public class RegistrationDoctorPanel extends javax.swing.JPanel {
             }
         }
         doctor.setDoctorScheduleList(doctorScheduleList);
-        
-        if(doctor.getDoctorId() != null){
+
+        if (doctor.getDoctorId() != null) {
             doctorRegistrationService.updateDoctor(doctor.getDoctorId(),
                     doctor.getDoctorName(), doctor.getSpecialist(), doctorScheduleList);
             JOptionPane.showMessageDialog(this, "Doctor updated with id " + doctor.getDoctorId());
@@ -269,9 +281,21 @@ public class RegistrationDoctorPanel extends javax.swing.JPanel {
         addDataSchedule();
     }//GEN-LAST:event_addScheduleBtnActionPerformed
 
+    private void deleteScheduleBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteScheduleBtnActionPerformed
+        DefaultTableModel model = (DefaultTableModel) doctorScheduleTbl.getModel();
+        int rowSelected = doctorScheduleTbl.getSelectedRow();
+
+        int optionChoose = JOptionPane.showConfirmDialog(this, "Are You sure want to delete the data", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+        if (optionChoose == 0) {
+            model.removeRow(rowSelected);
+        }
+    }//GEN-LAST:event_deleteScheduleBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addScheduleBtn;
+    private javax.swing.JButton deleteScheduleBtn;
     private javax.swing.JLabel doctorIdLbl;
     private javax.swing.JLabel doctorNameLbl;
     private javax.swing.JTextField doctorNameTxt;

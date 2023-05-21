@@ -19,11 +19,12 @@
           <Group type="102" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="addDoctorBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="updateDoctorBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="deleteDoctorBtn" min="-2" max="-2" attributes="0"/>
           </Group>
-          <Component id="jScrollPane1" alignment="0" pref="1024" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" pref="1024" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -33,6 +34,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="addDoctorBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="updateDoctorBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="deleteDoctorBtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="727" max="32767" attributes="0"/>
@@ -77,5 +79,13 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="deleteDoctorBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete Doctor"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteDoctorBtnActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

@@ -5,10 +5,12 @@
 package org.simple.clinic.outpatient.view.doctor;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JViewport;
 import javax.swing.table.DefaultTableModel;
 import org.simple.clinic.outpatient.model.Doctor;
 import org.simple.clinic.outpatient.repository.DoctorRepository;
+import org.simple.clinic.outpatient.service.DoctorRegistrationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -22,18 +24,18 @@ public class RegistrationDoctorDataPanel extends javax.swing.JPanel {
     
     private static final Logger logger = LoggerFactory.getLogger(RegistrationDoctorDataPanel.class);
     
-    private final DoctorRepository doctorRepository;
+    private final DoctorRegistrationService doctorRegistrationService;
     
     private final RegistrationDoctorPanel registrationDoctorPanel;
 
     /**
      * Creates new form RegistrationDoctorDataPanel
-     * @param doctorRepository
+     * @param doctorRegistrationService
      * @param registrationDoctorPanel
      */
-    public RegistrationDoctorDataPanel(DoctorRepository doctorRepository, RegistrationDoctorPanel registrationDoctorPanel) {
+    public RegistrationDoctorDataPanel(DoctorRegistrationService doctorRegistrationService, RegistrationDoctorPanel registrationDoctorPanel) {
         initComponents();
-        this.doctorRepository = doctorRepository;
+        this.doctorRegistrationService = doctorRegistrationService;
         this.registrationDoctorPanel = registrationDoctorPanel;
     }
     
@@ -43,7 +45,7 @@ public class RegistrationDoctorDataPanel extends javax.swing.JPanel {
     }
     
     public void loadData() {
-        List<Doctor> doctorList = doctorRepository.findAll();
+        List<Doctor> doctorList = doctorRegistrationService.findAll();
         clearDataDoctorTable();
         DefaultTableModel model = (DefaultTableModel) doctorTbl.getModel();
         for (int i = 0; i < doctorList.size(); i++) {
@@ -78,6 +80,7 @@ public class RegistrationDoctorDataPanel extends javax.swing.JPanel {
         updateDoctorBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         doctorTbl = new javax.swing.JTable();
+        deleteDoctorBtn = new javax.swing.JButton();
 
         addDoctorBtn.setText("Add Doctor");
         addDoctorBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +124,13 @@ public class RegistrationDoctorDataPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(doctorTbl);
 
+        deleteDoctorBtn.setText("Delete Doctor");
+        deleteDoctorBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteDoctorBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,9 +138,10 @@ public class RegistrationDoctorDataPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addDoctorBtn)
-                .addGap(49, 49, 49)
+                .addGap(18, 18, 18)
                 .addComponent(updateDoctorBtn)
-                .addGap(35, 35, 35))
+                .addGap(18, 18, 18)
+                .addComponent(deleteDoctorBtn))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -139,7 +150,8 @@ public class RegistrationDoctorDataPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addDoctorBtn)
-                    .addComponent(updateDoctorBtn))
+                    .addComponent(updateDoctorBtn)
+                    .addComponent(deleteDoctorBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE))
         );
@@ -158,9 +170,26 @@ public class RegistrationDoctorDataPanel extends javax.swing.JPanel {
         registrationDoctorPanel.loadDataById(Integer.parseInt(id));
     }//GEN-LAST:event_updateDoctorBtnActionPerformed
 
+    private void deleteDoctorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteDoctorBtnActionPerformed
+        DefaultTableModel model = (DefaultTableModel) doctorTbl.getModel();
+        int rowSelected = doctorTbl.getSelectedRow();
+        
+        String id = (String) model.getValueAt(rowSelected, 0);
+        int optionChoose = JOptionPane.showConfirmDialog(this, "Are You sure want to delete the data", "Confirmation", JOptionPane.YES_NO_OPTION);
+        
+        if(optionChoose == 0){
+            Doctor doctor = doctorRegistrationService.deleteDoctor(Integer.parseInt(id));
+            if(doctor.getIsDeleted()){
+                JOptionPane.showMessageDialog(this, "You have deleted the data");
+                loadData();
+            }
+        }
+    }//GEN-LAST:event_deleteDoctorBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDoctorBtn;
+    private javax.swing.JButton deleteDoctorBtn;
     private javax.swing.JTable doctorTbl;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton updateDoctorBtn;

@@ -6,6 +6,7 @@ package org.simple.clinic.outpatient.service.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import org.simple.clinic.outpatient.model.Doctor;
 import org.simple.clinic.outpatient.model.DoctorSchedule;
 import org.simple.clinic.outpatient.repository.DoctorRepository;
@@ -103,6 +104,21 @@ public class DoctorRegistrationServiceImpl implements DoctorRegistrationService 
        logger.info("" + doctor);
        logger.info(""+doctorScheduleList);
        return doctorRepository.save(doctor);
+    }
+
+    @Override
+    public Doctor deleteDoctor(int id) {
+        Optional<Doctor> doctor = doctorRepository.findById(id);
+        doctor.ifPresent((Doctor d) -> {
+            d.setIsDeleted(true);
+            doctorRepository.save(d);
+        });
+        return doctor.orElse(new Doctor());
+    }
+
+    @Override
+    public List<Doctor> findAll() {
+        return doctorRepository.findAllWithoutDeleted();
     }
     
 }

@@ -53,6 +53,7 @@ public class RegistrationDoctorPanel extends javax.swing.JPanel {
     public void clearData() {
         doctorNameTxt.setText("");
         doctorSpecialistTxt.setText("");
+        doctorIdLbl.setText("");
         clearDataSchedule();
     }
     

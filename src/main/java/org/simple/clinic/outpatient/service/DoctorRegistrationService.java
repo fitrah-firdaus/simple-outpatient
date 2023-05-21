@@ -5,7 +5,6 @@
 package org.simple.clinic.outpatient.service;
 
 import java.util.List;
-import java.util.Optional;
 import org.simple.clinic.outpatient.model.Doctor;
 import org.simple.clinic.outpatient.model.DoctorSchedule;
 
@@ -17,6 +16,10 @@ public interface DoctorRegistrationService {
     Doctor saveDoctor(String doctorName, String specialist, List<DoctorSchedule> doctorScheduleList);
     
     Doctor findDoctorById(int id);
+    
+    Doctor deleteDoctor(int id);
+    
+    List<Doctor> findAll();
     
     void updateDoctor(int doctorId,
             String doctorName,

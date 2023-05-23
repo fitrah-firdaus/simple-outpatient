@@ -18,16 +18,18 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 /**
  *
- * @author fef339
+ * @author fitra
  */
 @Entity
 @Table(catalog = "outpatient", schema = "")
 @NamedQueries({
     @NamedQuery(name = "Doctor.findAll", query = "SELECT d FROM Doctor d")})
-public class Doctor extends BaseModel implements Serializable {
+public class Doctor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,10 +43,18 @@ public class Doctor extends BaseModel implements Serializable {
     @Basic(optional = false)
     @Column(nullable = false, length = 50)
     private String specialist;
+    @Basic(optional = false)
+    @Column(name = "date_created", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateCreated;
+    @Column(name = "last_modified")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastModified;
+    @Basic(optional = false)
+    @Column(name = "is_deleted", nullable = false)
+    private boolean isDeleted;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctorId")
-    private List<Booking> bookingList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "doctorId")
-    private List<MedicalRecord> medicalRecordList;
+    private List<DoctorSchedule> doctorScheduleList;
 
     public Doctor() {
     }
@@ -85,20 +95,36 @@ public class Doctor extends BaseModel implements Serializable {
         this.specialist = specialist;
     }
 
-    public List<Booking> getBookingList() {
-        return bookingList;
+    public Date getDateCreated() {
+        return dateCreated;
     }
 
-    public void setBookingList(List<Booking> bookingList) {
-        this.bookingList = bookingList;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public List<MedicalRecord> getMedicalRecordList() {
-        return medicalRecordList;
+    public Date getLastModified() {
+        return lastModified;
     }
 
-    public void setMedicalRecordList(List<MedicalRecord> medicalRecordList) {
-        this.medicalRecordList = medicalRecordList;
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public List<DoctorSchedule> getDoctorScheduleList() {
+        return doctorScheduleList;
+    }
+
+    public void setDoctorScheduleList(List<DoctorSchedule> doctorScheduleList) {
+        this.doctorScheduleList = doctorScheduleList;
     }
 
     @Override
@@ -110,12 +136,15 @@ public class Doctor extends BaseModel implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        
+        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Doctor)) {
             return false;
         }
         Doctor other = (Doctor) object;
-        return !((this.doctorId == null && other.doctorId != null) || (this.doctorId != null && !this.doctorId.equals(other.doctorId)));
+        if ((this.doctorId == null && other.doctorId != null) || (this.doctorId != null && !this.doctorId.equals(other.doctorId))) {
+            return false;
+        }
+        return true;
     }
 
     @Override

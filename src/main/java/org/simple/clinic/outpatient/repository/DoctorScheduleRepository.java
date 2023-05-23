@@ -6,21 +6,17 @@ package org.simple.clinic.outpatient.repository;
 
 import java.util.List;
 import org.simple.clinic.outpatient.model.Doctor;
+import org.simple.clinic.outpatient.model.DoctorSchedule;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author fef339
+ * @author fitra
  */
 @Repository
-public interface DoctorRepository extends
-        JpaRepository<Doctor, Integer>{
+public interface DoctorScheduleRepository extends
+        JpaRepository<DoctorSchedule, Integer>{
     
-    @Query("select d from Doctor d join fetch d.doctorScheduleList where d.doctorId = ?1 and d.isDeleted = false")
-    Doctor findByIdWithDoctorSchedule(Integer id);
-    
-    @Query("select d from Doctor d where d.isDeleted = false")
-    List<Doctor> findAllWithoutDeleted();
+    List<DoctorSchedule> findByDoctorId(Doctor doctor);
 }

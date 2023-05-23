@@ -4,7 +4,6 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>org.simple.clinic.outpatient.model.Recipe</class>
     <class>org.simple.clinic.outpatient.model.Payment</class>
-    <class>org.simple.clinic.outpatient.model.Doctor</class>
     <class>org.simple.clinic.outpatient.model.RecipeDetails</class>
     <class>org.simple.clinic.outpatient.model.Booking</class>
     <class>org.simple.clinic.outpatient.model.Menu</class>
@@ -14,6 +13,8 @@
     <class>org.simple.clinic.outpatient.model.Role</class>
     <class>org.simple.clinic.outpatient.model.Patient</class>
     <class>org.simple.clinic.outpatient.model.Medicine</class>
+    <class>org.simple.clinic.outpatient.model.Doctor</class>
+    <class>org.simple.clinic.outpatient.model.DoctorSchedule</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/outpatient?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

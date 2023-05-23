@@ -5,9 +5,12 @@
 package org.simple.clinic.outpatient.service.impl;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import org.simple.clinic.outpatient.model.Doctor;
+import org.simple.clinic.outpatient.model.DoctorSchedule;
 import org.simple.clinic.outpatient.repository.DoctorRepository;
+import org.simple.clinic.outpatient.repository.DoctorSheduleRepository;
 import org.simple.clinic.outpatient.service.DoctorRegistrationService;
 import org.springframework.stereotype.Service;
 
@@ -19,27 +22,31 @@ import org.springframework.stereotype.Service;
 public class DoctorRegistrationServiceImpl implements DoctorRegistrationService {
 
     public DoctorRegistrationServiceImpl(
-            DoctorRepository 
-                    doctorRepository) {
+            DoctorRepository doctorRepository
+            , DoctorSheduleRepository 
+                    doctorScheduleRepository) {
         this.doctorRepository = 
                 doctorRepository;
+        this.doctorScheduleRepository = 
+                doctorScheduleRepository;
     }
 
     private final DoctorRepository 
             doctorRepository;
+    private final DoctorSheduleRepository
+            doctorScheduleRepository;
     @Override
-    public Optional<Doctor> findDoctorById(int id) {
-        return doctorRepository.findById(id);
+    public Doctor findDoctorById(int id) {
+        return doctorRepository
+                .findByIdWithDoctorSchedule(id);
     }
 
-    @Override
-    public void updateDoctor(int doctorId, String doctorName, String doctorSpecialist) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     
     private void persistDoctor(Doctor doctor,
             String doctorName,
-            String doctorSpecialist){
+            String doctorSpecialist,
+            List<DoctorSchedule> 
+                    doctorScheduleList){
         if(doctor == null) {
             doctor = new Doctor();
         }
@@ -51,6 +58,27 @@ public class DoctorRegistrationServiceImpl implements DoctorRegistrationService 
             doctor.setDateCreated(new Date());
         }
         doctorRepository.save(doctor);
+        
+    }
+
+    @Override
+    public void updateDoctor(int doctorId, String doctorName, String doctorSpecialist, List<DoctorSchedule> doctorScheduleList) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Doctor saveDoctor(String doctorName, String specialist, List<DoctorSchedule> doctorScheduleList) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Doctor deleteDoctor(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public List<Doctor> findAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

@@ -19,18 +19,32 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="344" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="doctorNameLbl" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="doctorSpecialistLbl" alignment="0" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="doctorRegistrationBtn" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="doctorNameTxt" max="32767" attributes="0"/>
-                      <Component id="doctorSpecialistTxt" pref="198" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="addScheduleBtn" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="doctorNameLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="doctorSpecialistLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="doctorSpecialistTxt" min="-2" pref="198" max="-2" attributes="0"/>
+                                  <Component id="doctorNameTxt" min="-2" pref="198" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="deleteScheduleBtn" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="320" max="32767" attributes="0"/>
+              <EmptySpace pref="228" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="doctorRegistrationBtn" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="391" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,9 +61,16 @@
                   <Component id="doctorSpecialistLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="doctorSpecialistTxt" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="addScheduleBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="deleteScheduleBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="137" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="doctorRegistrationBtn" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="615" max="32767" attributes="0"/>
+              <EmptySpace pref="438" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -72,6 +93,36 @@
     <Component class="javax.swing.JButton" name="doctorRegistrationBtn">
       <Properties>
         <Property name="text" type="java.lang.String" value="Register Doctor"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTable" name="doctorScheduleTbl">
+          <Properties>
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+              <Table columnCount="3" rowCount="4">
+                <Column editable="true" title="Day" type="java.lang.String"/>
+                <Column editable="true" title="Start Time" type="java.lang.Object"/>
+                <Column editable="true" title="End Time" type="java.lang.Object"/>
+              </Table>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JButton" name="addScheduleBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Add Schedule"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="deleteScheduleBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete Schedule"/>
       </Properties>
     </Component>
   </SubComponents>

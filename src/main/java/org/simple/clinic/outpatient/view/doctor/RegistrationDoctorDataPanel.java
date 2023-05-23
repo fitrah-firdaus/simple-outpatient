@@ -33,6 +33,7 @@ public class RegistrationDoctorDataPanel extends javax.swing.JPanel {
         updateDoctorBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         doctorTbl = new javax.swing.JTable();
+        deleteDoctorBtn = new javax.swing.JButton();
 
         addDoctorBtn.setText("Add Doctor");
 
@@ -66,6 +67,8 @@ public class RegistrationDoctorDataPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(doctorTbl);
 
+        deleteDoctorBtn.setText("Delete Doctor");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -73,9 +76,11 @@ public class RegistrationDoctorDataPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addDoctorBtn)
-                .addGap(49, 49, 49)
+                .addGap(18, 18, 18)
                 .addComponent(updateDoctorBtn)
-                .addGap(35, 35, 35))
+                .addGap(18, 18, 18)
+                .addComponent(deleteDoctorBtn)
+                .addGap(86, 86, 86))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -84,7 +89,8 @@ public class RegistrationDoctorDataPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addDoctorBtn)
-                    .addComponent(updateDoctorBtn))
+                    .addComponent(updateDoctorBtn)
+                    .addComponent(deleteDoctorBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 727, Short.MAX_VALUE))
         );
@@ -93,6 +99,7 @@ public class RegistrationDoctorDataPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addDoctorBtn;
+    private javax.swing.JButton deleteDoctorBtn;
     private javax.swing.JTable doctorTbl;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton updateDoctorBtn;

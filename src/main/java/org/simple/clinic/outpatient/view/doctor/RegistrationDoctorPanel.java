@@ -34,12 +34,41 @@ public class RegistrationDoctorPanel extends javax.swing.JPanel {
         doctorSpecialistLbl = new javax.swing.JLabel();
         doctorSpecialistTxt = new javax.swing.JTextField();
         doctorRegistrationBtn = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        doctorScheduleTbl = new javax.swing.JTable();
+        addScheduleBtn = new javax.swing.JButton();
+        deleteScheduleBtn = new javax.swing.JButton();
 
         doctorNameLbl.setText("Doctor Name");
 
         doctorSpecialistLbl.setText("Specialist");
 
         doctorRegistrationBtn.setText("Register Doctor");
+
+        doctorScheduleTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Day", "Start Time", "End Time"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(doctorScheduleTbl);
+
+        addScheduleBtn.setText("Add Schedule");
+
+        deleteScheduleBtn.setText("Delete Schedule");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -48,15 +77,25 @@ public class RegistrationDoctorPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(344, 344, 344)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(doctorNameLbl)
-                    .addComponent(doctorSpecialistLbl))
-                .addGap(86, 86, 86)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(doctorRegistrationBtn)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(doctorNameTxt)
-                        .addComponent(doctorSpecialistTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)))
-                .addContainerGap(320, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(addScheduleBtn)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(doctorNameLbl)
+                                    .addComponent(doctorSpecialistLbl))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(doctorSpecialistTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(doctorNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteScheduleBtn)))
+                .addContainerGap(228, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(doctorRegistrationBtn)
+                .addGap(391, 391, 391))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,18 +108,28 @@ public class RegistrationDoctorPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(doctorSpecialistLbl)
                     .addComponent(doctorSpecialistTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addScheduleBtn)
+                    .addComponent(deleteScheduleBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(doctorRegistrationBtn)
-                .addContainerGap(615, Short.MAX_VALUE))
+                .addContainerGap(438, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addScheduleBtn;
+    private javax.swing.JButton deleteScheduleBtn;
     private javax.swing.JLabel doctorNameLbl;
     private javax.swing.JTextField doctorNameTxt;
     private javax.swing.JButton doctorRegistrationBtn;
+    private javax.swing.JTable doctorScheduleTbl;
     private javax.swing.JLabel doctorSpecialistLbl;
     private javax.swing.JTextField doctorSpecialistTxt;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
